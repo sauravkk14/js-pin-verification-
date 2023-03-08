@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<script>
+
+    var count=2;
+    function VerifyClick()
+    {
+            var pw = document.getElementById("pin").value;
+            var pwArray = ["4250"]; 
+           
+            for (var i=0; i <pwArray.length; i++)
+            {
+                if(pw==="")
+                {
+                    document.getElementById("message").innerHTML=`<b>Please Enter Your Password</b>`.fontcolor('red');
+                }
+                else
+                {
+                        if ((pw == pwArray[i])) 
+                        {
+                            document.getElementById("message").innerHTML="<b>Correct Password</b>".fontcolor('green');
+                            document.getElementById("pin").value="";
+                            return;
+                        }
+                        
+                        if (count>=1) 
+                        {
+                        document.getElementById("message").innerHTML=`<b>Incorrect Password ! <br> You Have ${count} Attempt(s) Left</b>`.fontcolor('goldenrod');
+                        count-=1;
+                        document.getElementById("pin").value="";
+                        document.getElementById("hint").style.display="block";
+                        document.getElementById("hint2").style.display="block";
+                        }
+                        else
+                        {
+                        document.getElementById("message").innerHTML="<b>Your Card is Blocked due to Wrong Attempts<b>".fontcolor('red');
+                        document.getElementById("pin").value="";
+                        document.getElementById("pin").disabled=true;
+                        document.getElementById("submit").disabled=true;
+                        }
+                }
+                
+            }  
+            
+    }
+</script>
+<style>
+    .box{
+        border:2px solid rgb(16, 16, 16);
+        padding:80px;
+        border-radius:20px;
+    }
+    h2{
+       font-size:35px;
+       color:rgba(255, 0, 0, 0.918);
+       text-shadow: 2px 1px 2px grey;
+    }
+</style>
+<body onload="bodyload()">
+        <div class="main d-flex justify-content-center align-items-center mt-5">
+            <div class="box">
+                <h2>PIN Verification</h2>
+                <input type="password" class="form-control mt-4" id="pin" maxlength="4">
+                <div class="d-flex justify-content-center mt-4">
+                    <button onclick="VerifyClick()" id="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="mt-3 text-center">
+                    <p style="display:none" id="hint2"><b>Password Hint :</b><span style="display:none" id="hint"><b>4-2-5-0</b></span></p>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <p id="message"></p>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
